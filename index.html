@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu Do Ré Mi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    #note {
+      font-size: 40px;
+      margin: 20px;
+    }
+
+    button {
+      font-size: 20px;
+      margin: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    #score {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🎵 Jeu Do–Ré–Mi</h1>
+
+<div id="note">Clique pour commencer</div>
+
+<div>
+  <button onclick="answer('A')">A</button>
+  <button onclick="answer('B')">B</button>
+  <button onclick="answer('C')">C</button>
+  <button onclick="answer('D')">D</button>
+  <button onclick="answer('E')">E</button>
+  <button onclick="answer('F')">F</button>
+  <button onclick="answer('G')">G</button>
+</div>
+
+<div id="score">Score : 0 / 0</div>
+
+<script>
+const notes = [
+  { solfege: "Do", letter: "C" },
+  { solfege: "Ré", letter: "D" },
+  { solfege: "Mi", letter: "E" },
+  { solfege: "Fa", letter: "F" },
+  { solfege: "Sol", letter: "G" },
+  { solfege: "La", letter: "A" },
+  { solfege: "Si", letter: "B" }
+];
+
+let current;
+let score = 0;
+let total = 0;
+
+function newQuestion() {
+  current = notes[Math.floor(Math.random() * notes.length)];
+  document.getElementById("note").innerText = "🎵 " + current.solfege + " = ?";
+}
+
+function answer(letter) {
+  if (!current) newQuestion();
+
+  total++;
+
+  if (letter === current.letter) {
+    score++;
+    alert("✅ Correct !");
+  } else {
+    alert("❌ Faux ! Réponse : " + current.letter);
+  }
+
+  document.getElementById("score").innerText =
+    `Score : ${score} / ${total}`;
+
+  newQuestion();
+}
+
+// start
+newQuestion();
+</script>
+
+</body>
+</html>
